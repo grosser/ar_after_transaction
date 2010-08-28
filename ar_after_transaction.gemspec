@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "Readme.md",
      "VERSION",
+     "ar_after_transaction.gemspec",
      "init.rb",
      "lib/ar_after_transaction.rb",
      "spec/ar_after_transaction_spec.rb",
@@ -26,7 +27,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{Execute irreversable actions only when transactions are not rolled back}
+  s.summary = %q{Execute irreversible actions only when transactions are not rolled back}
   s.test_files = [
     "spec/setup_database.rb",
      "spec/spec_helper.rb",
