@@ -50,7 +50,7 @@ describe ARAfterTransaction do
     User.test_callbacks = [:do_after, :do_normal, :oops]
     lambda{
       User.create!
-    }.should raise_error(AnExpectedError) 
+    }.should raise_error(AnExpectedError)
     User.test_stack.should == [:normal]
   end
 
