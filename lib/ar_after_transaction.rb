@@ -21,7 +21,7 @@ module ARAfterTransaction
       clean = false
       raise
     ensure
-      if transactions_open?
+      unless transactions_open?
         execute_after_transaction_callbacks if clean
         clear_transaction_callbacks
       end
@@ -38,10 +38,10 @@ module ARAfterTransaction
     private
 
     def transactions_open?
-      connection.open_transactions >= normal_transactions
+      connection.open_transactions > normally_open_transactions
     end
 
-    def normal_transactions_depth
+    def normally_open_transactions
       Rails.env.test? ? 1 : 0
     end
 
