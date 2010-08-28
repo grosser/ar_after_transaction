@@ -38,6 +38,10 @@ There is a after_commit hook in Rails 3, which can replace the first usage:
 
 after_transaction will behave like it would not exist if you are not in an transaction when calling it.
 
+
+    rails plugin install git://github.com/grosser/ar_after_transaction
+    gem install ar_after_transaction
+
 TODO
 =====
  - find out if we are in test mode with or without transactions (atm assumes depth of 1 for 'test' env)
@@ -45,7 +49,7 @@ TODO
 
 Author
 ======
-Original idea and code comes from: https://rails.lighthouseapp.com/projects/8994/tickets/2991-after-transaction-patch 
+Original idea and code comes from: Jeremy Kemper @ https://rails.lighthouseapp.com/projects/8994/tickets/2991-after-transaction-patch 
 
 
 [Michael Grosser](http://pragmatig.wordpress.com)  
