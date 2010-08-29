@@ -1,4 +1,4 @@
-Perform stuff (only) after the currently open transactions have finished.
+Do something only after the currently open transactions have finished.
 
 Normally everything gets rolled back when a transaction fails, but you cannot roll back sending an email or adding a job to Resque.
 
@@ -10,7 +10,7 @@ Its great for just-in-time callbacks:
         after_transaction do
           send_an_email # cannot be rolled back
         end
-        comments.build(...) # can be rolled back
+        comments.create(...) # will be rolled back
       end
 
       def oops
@@ -24,11 +24,11 @@ Or general 'this should be rolled back when in a transaction code like jobs:
       def revertable_enqueue(*args)
         ActiveRecord::Base.after_transaction do
           enqueue(*args)
-       end
+        end
       end
     end
     
-There is a after_commit hook in Rails 3, which can replace the first usage:
+Alternative: after_commit hook in Rails 3, can replace the first usage:
 
     class User
       after_commit :send_an_email :on=>:create
@@ -36,7 +36,7 @@ There is a after_commit hook in Rails 3, which can replace the first usage:
       ...
     end
 
-after_transaction will behave like it would not exist if you are not in an transaction when calling it.
+after_transaction will perform the given block imediatly if no transactions are open.
 
 
     rails plugin install git://github.com/grosser/ar_after_transaction
@@ -49,7 +49,7 @@ TODO
 
 Author
 ======
-Original idea and code comes from: Jeremy Kemper @ https://rails.lighthouseapp.com/projects/8994/tickets/2991-after-transaction-patch 
+[Original idea and code](https://rails.lighthouseapp.com/projects/8994/tickets/2991-after-transaction-patch) from [Jamis Buck](http://weblog.jamisbuck.org/) (post by Jeremy Kemper)
 
 
 [Michael Grosser](http://pragmatig.wordpress.com)  
