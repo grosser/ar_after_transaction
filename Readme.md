@@ -47,9 +47,12 @@ TODO
  - find out if we are in test mode with or without transactions (atm assumes depth of 1 for 'test' env)
 
 
-Author
-======
+Authors
+=======
 [Original idea and code](https://rails.lighthouseapp.com/projects/8994/tickets/2991-after-transaction-patch) from [Jamis Buck](http://weblog.jamisbuck.org/) (post by Jeremy Kemper)
+
+### [Contributors](http://github.com/grosser/ar_after_transaction/contributors)
+ - [Bogdan Gusiev](http://gusiev.com)
 
 
 [Michael Grosser](http://pragmatig.wordpress.com)  
