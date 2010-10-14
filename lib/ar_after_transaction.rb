@@ -22,8 +22,8 @@ module ARAfterTransaction
       raise
     ensure
       unless transactions_open?
-        execute_after_transaction_callbacks if clean
-        clear_transaction_callbacks
+        callbacks = get_after_transaction_callbacks
+        execute_callbacks(callbacks) if clean
       end
     end
 
@@ -45,12 +45,14 @@ module ARAfterTransaction
       Rails.env.test? ? 1 : 0
     end
 
-    def execute_after_transaction_callbacks
-      @@after_transaction_hooks.each { |hook| hook.call }
+    def execute_callbacks(callbacks)
+      callbacks.each { |hook| hook.call }
     end
 
-    def clear_transaction_callbacks
-      @@after_transaction_hooks.clear
+    def get_after_transaction_callbacks
+      result = @@after_transaction_hooks
+      @@after_transaction_hooks = []
+      result
     end
   end
 

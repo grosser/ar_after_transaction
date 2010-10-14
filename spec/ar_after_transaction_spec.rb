@@ -15,6 +15,9 @@ class User
 
   def do_after
     after_transaction do
+      ActiveRecord::Base.transaction do
+        # nested transaction should not cause infinitive recursion
+      end
       self.class.test_stack << :after
     end
   end

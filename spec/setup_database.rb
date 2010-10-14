@@ -3,7 +3,7 @@ ActiveRecord::Base.establish_connection(
   :database => "ar_after_transaction"
 )
 
-ActiveRecord::Base.connection.execute('drop table users')
+ActiveRecord::Base.connection.execute('drop table if exists users')
 ActiveRecord::Schema.define(:version => 1) do
   create_table :users do |t|
     t.string :name
