@@ -5,18 +5,14 @@ module ARAfterTransaction
 
   def self.included(base)
     base.extend(ClassMethods)
-
-    class << base
-      alias_method_chain :transaction, :callbacks
-    end
   end
 
   module ClassMethods
-    @@after_transaction_hooks = []
+    @@after_transaction_callbacks = []
 
-    def transaction_with_callbacks(&block)
+    def transaction(&block)
       clean = true
-      transaction_without_callbacks(&block)
+      super(&block)
     rescue Exception
       clean = false
       raise
@@ -29,7 +25,7 @@ module ARAfterTransaction
 
     def after_transaction(&block)
       if transactions_open?
-        @@after_transaction_hooks << block
+        @@after_transaction_callbacks << block
       else
         yield
       end
@@ -46,8 +42,8 @@ module ARAfterTransaction
     end
 
     def delete_after_transaction_callbacks
-      result = @@after_transaction_hooks
-      @@after_transaction_hooks = []
+      result = @@after_transaction_callbacks
+      @@after_transaction_callbacks = []
       result
     end
   end
