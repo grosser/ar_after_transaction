@@ -2,7 +2,16 @@ Do something only after the currently open transactions have finished.
 
 Normally everything gets rolled back when a transaction fails, but you cannot roll back sending an email or adding a job to Resque.
 
-Its great for just-in-time callbacks:
+Install
+=======
+    rails plugin install git://github.com/grosser/ar_after_transaction
+or
+    gem install ar_after_transaction
+
+
+Usage
+=====
+### just-in-time callbacks
     class User
       after_create :do_stuff, :oops
 
@@ -18,7 +27,7 @@ Its great for just-in-time callbacks:
       end
     end
 
-Or general 'this should be rolled back when in a transaction code like jobs:
+### General 'this should be rolled back when in a transaction' code like jobs
 
     class Resque
       def revertable_enqueue(*args)
@@ -27,8 +36,8 @@ Or general 'this should be rolled back when in a transaction code like jobs:
         end
       end
     end
-    
-Alternative: after_commit hook in Rails 3, can replace the first usage:
+
+### Rails 3: after_commit hook can replace the first usage:
 
     class User
       after_commit :send_an_email :on=>:create
@@ -37,10 +46,6 @@ Alternative: after_commit hook in Rails 3, can replace the first usage:
     end
 
 after_transaction will perform the given block imediatly if no transactions are open.
-
-
-    rails plugin install git://github.com/grosser/ar_after_transaction
-    gem install ar_after_transaction
 
 TODO
 =====
@@ -54,8 +59,6 @@ Authors
 ### [Contributors](http://github.com/grosser/ar_after_transaction/contributors)
  - [Bogdan Gusiev](http://gusiev.com)
 
-
-[Michael Grosser](http://pragmatig.wordpress.com)  
-grosser.michael@gmail.com  
+[Michael Grosser](http://grosser.it)<br/>
+michael@grosser.it<br/>
 Hereby placed under public domain, do what you want, just do not hold me accountable...
-

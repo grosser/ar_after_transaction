@@ -4,12 +4,11 @@ Spec::Rake::SpecTask.new {|t| t.spec_opts = ['--color --backtrace']}
 
 begin
   require 'jeweler'
-  project_name = 'ar_after_transaction'
   Jeweler::Tasks.new do |gem|
-    gem.name = project_name
+    gem.name = 'ar_after_transaction'
     gem.summary = "Execute irreversible actions only when transactions are not rolled back"
-    gem.email = "grosser.michael@gmail.com"
-    gem.homepage = "http://github.com/grosser/#{project_name}"
+    gem.email = "michael@grosser.it"
+    gem.homepage = "http://github.com/grosser/#{gem.name}"
     gem.authors = ["Michael Grosser"]
     gem.add_dependency ['activerecord']
   end
