@@ -33,7 +33,7 @@ end
 
 describe ARAfterTransaction do
   before do
-    Rails.env = 'development'
+    User.normally_open_transactions = nil
     User.send(:transactions_open?).should == false
     User.test_stack.clear
     User.test_callbacks.clear
@@ -75,7 +75,7 @@ describe ARAfterTransaction do
   end
 
   it "executes when open transactions are normal" do
-    Rails.env = 'test'
+    User.normally_open_transactions = 1
     User.test_callbacks = [:do_after, :do_normal]
     User.create!
     User.test_stack.should == [:after, :normal]
@@ -97,5 +97,16 @@ describe ARAfterTransaction do
       User.create!
     }.should raise_error(AnExpectedError)
     User.test_stack.should == [:normal, :normal]
+  end
+
+  describe :normally_open_transactions do
+    it "uses 0 by default" do
+      User.normally_open_transactions.should == 0
+    end
+
+    it "can set normally open transactions" do
+      User.normally_open_transactions = 5
+      User.normally_open_transactions.should == 5
+    end
   end
 end
