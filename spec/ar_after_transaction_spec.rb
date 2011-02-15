@@ -57,6 +57,16 @@ describe ARAfterTransaction do
     User.test_stack.should == [:normal]
   end
 
+  it "clears transation callbacks when transaction fails" do
+    User.test_callbacks = [:do_after, :do_normal, :oops]
+    lambda{
+      User.create!
+    }.should raise_error(AnExpectedError)
+    User.test_callbacks = [:do_normal]
+    User.create!
+    User.test_stack.should == [:normal, :normal]
+  end
+
   it "executes when no transaction is open" do
     user = User.new
     user.do_after
