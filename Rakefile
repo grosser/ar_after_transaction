@@ -1,6 +1,10 @@
+require 'rspec/core/rake_task'
+
 task :default => :spec
-require 'spec/rake/spectask'
-Spec::Rake::SpecTask.new {|t| t.spec_opts = ['--color --backtrace']}
+
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = ['--color']
+end
 
 begin
   require 'jeweler'
