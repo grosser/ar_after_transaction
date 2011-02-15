@@ -37,20 +37,25 @@ Usage
       end
     end
 
-### Rails 3: after_commit hook can replace the first usage:
+### When not in a transaction
+after_transaction will perform the given block immediately
+
+### Transactional fixtures <-> normally_open_transactions
+after_transaction assumes zero open transactions.<br/>
+If you use transactional fixtures you should change it in test mode.
+
+    # config/environments/test.rb
+    config.after_initialize do
+      ActiveRecord::Base.normally_open_transactions = 1
+    end
+
+### Rails 3: after_commit hook can replace the first usage example:
 
     class User
       after_commit :send_an_email :on=>:create
-      ater_create :do_stuff, :oops
+      after_create :do_stuff, :oops
       ...
     end
-
-after_transaction will perform the given block imediatly if no transactions are open.
-
-TODO
-=====
- - find out if we are in test mode with or without transactions (atm assumes depth of 1 for 'test' env)
-
 
 Authors
 =======
@@ -58,6 +63,7 @@ Authors
 
 ### [Contributors](http://github.com/grosser/ar_after_transaction/contributors)
  - [Bogdan Gusiev](http://gusiev.com)
+ - [Benedikt Deicke](http://blog.synatic.net)
 
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
