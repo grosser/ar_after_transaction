@@ -108,5 +108,10 @@ describe ARAfterTransaction do
       User.normally_open_transactions = 5
       User.normally_open_transactions.should == 5
     end
+
+    it "sets them globally" do
+      User.normally_open_transactions = 5
+      ActiveRecord::Base.normally_open_transactions.should == 5
+    end
   end
 end

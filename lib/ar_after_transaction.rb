@@ -32,11 +32,11 @@ module ARAfterTransaction
     end
 
     def normally_open_transactions
-      @normally_open_transactions ||= 0
+      @@normally_open_transactions ||= 0
     end
 
     def normally_open_transactions=(value)
-      @normally_open_transactions = value
+      @@normally_open_transactions = value
     end
 
     private
