@@ -1,11 +1,9 @@
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new do |t|
-  t.rspec_opts = ['--color']
+task :spec do
+  sh "bundle exec rspec spec"
 end
 
 task :rails2 do
-  sh "cd spec/rails2 && RAILS=rails rspec ../../spec"
+  sh "cd spec/rails2 && bundle exec rspec ../../spec"
 end
 
 task :default do
