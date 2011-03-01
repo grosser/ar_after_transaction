@@ -1,4 +1,4 @@
-require "spec/spec_helper"
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
 class AnExpectedError < Exception
 end

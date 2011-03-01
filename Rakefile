@@ -1,10 +1,17 @@
 require 'rspec/core/rake_task'
 
-task :default => :spec
-
 RSpec::Core::RakeTask.new do |t|
   t.rspec_opts = ['--color']
 end
+
+task :rails2 do
+  sh "cd spec/rails2 && RAILS=rails rspec ../../spec"
+end
+
+task :default do
+  sh "rake spec && rake rails2"
+end
+
 
 begin
   require 'jeweler'

@@ -1,4 +1,4 @@
-require 'rubygems'
-$LOAD_PATH << "lib"
-require "init"
-require "spec/setup_database"
+current = File.dirname(File.dirname(__FILE__))
+$LOAD_PATH << "#{current}/lib"
+require "#{current}/init"
+require "#{current}/spec/setup_database"
