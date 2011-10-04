@@ -57,6 +57,14 @@ If you use transactional fixtures you should change it in test mode.
       ...
     end
 
+Alternative
+===========
+[after_commit](https://github.com/freelancing-god/after_commit)<br/>
+ + threadsafe<br/>
+ + more fine-grained callacks<br/>
+ - no instant `after_transaction do` support<br/>
+ - more complex<br/>
+
 Authors
 =======
 [Original idea and code](https://rails.lighthouseapp.com/projects/8994/tickets/2991-after-transaction-patch) from [Jamis Buck](http://weblog.jamisbuck.org/) (post by Jeremy Kemper)
