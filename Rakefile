@@ -1,15 +1,11 @@
 task :spec do
-  sh "bundle exec rspec spec"
-end
-
-task :rails2 do
-  sh "cd spec/rails2 && bundle exec rspec ../../spec"
+  sh "rspec spec"
 end
 
 task :default do
-  sh "rake spec && rake rails2"
+  sh "RAILS='~>2' && (bundle || bundle install) && bundle exec rake spec"
+  sh "RAILS='~>3' && (bundle || bundle install) && bundle exec rake spec"
 end
-
 
 begin
   require 'jeweler'
