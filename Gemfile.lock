@@ -39,7 +39,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 3)
-  activesupport (~> 3)
   jeweler
   mysql
   rake
