@@ -10,9 +10,9 @@ module ARAfterTransaction
   module ClassMethods
     @@after_transaction_callbacks = []
 
-    def transaction(&block)
+    def transaction(*args, &block)
       clean = true
-      super(&block)
+      super
     rescue Exception
       clean = false
       raise

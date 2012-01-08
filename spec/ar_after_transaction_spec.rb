@@ -99,6 +99,10 @@ describe ARAfterTransaction do
     User.test_stack.should == [:normal, :normal]
   end
 
+  it "does not crash with additional options" do
+    User.transaction(:requires_new => true){}
+  end
+
   describe :normally_open_transactions do
     it "uses 0 by default" do
       User.normally_open_transactions.should == 0
