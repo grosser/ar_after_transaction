@@ -1,3 +1,5 @@
+require 'bundler/gem_tasks'
+
 task :spec do
   sh "rspec spec"
 end
@@ -7,18 +9,16 @@ task :default do
   sh "RAILS='~>3' && (bundle || bundle install) && bundle exec rake spec"
 end
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = 'ar_after_transaction'
-    gem.summary = "Execute irreversible actions only when transactions are not rolled back"
-    gem.email = "michael@grosser.it"
-    gem.homepage = "http://github.com/grosser/#{gem.name}"
-    gem.authors = ["Michael Grosser"]
-    gem.add_dependency ['activerecord']
-  end
+rule /^version:bump:.*/ do |t|
+  sh "git status | grep 'nothing to commit'" # ensure we are not dirty
+  index = ['major', 'minor','patch'].index(t.name.split(':').last)
+  file = 'lib/youtube_search/version.rb'
 
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler, or one of its dependencies, is not available. Install it with: gem install jeweler"
+  version_file = File.read(file)
+  old_version, *version_parts = version_file.match(/(\d+)\.(\d+)\.(\d+)/).to_a
+  version_parts[index] = version_parts[index].to_i + 1
+  new_version = version_parts * '.'
+  File.open(file,'w'){|f| f.write(version_file.sub(old_version, new_version)) }
+
+  sh "bundle && git add #{file} Gemfile.lock && git commit -m 'bump version to #{new_version}'"
 end
