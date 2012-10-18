@@ -59,10 +59,10 @@ If you use transactional fixtures you should change it in test mode.
 
 Alternative
 ===========
-[after_commit](https://github.com/freelancing-god/after_commit)<br/>
+[after_commit](https://github.com/pat/after_commit)<br/>
  + threadsafe<br/>
- + more fine-grained callacks<br/>
- - no instant `after_transaction do` support<br/>
+ + more fine-grained callbacks (before_commit, `after_commit`, before_rollback, after_rollback)<br/>
+ - doesn't let you define `after_transaction` callbacks *anywhere* like `ar_after_transaction` does (*outside* of the `after_commit`, etc. callbacks which only happen at certain points in the model's life cycle)<br/>
  - more complex<br/>
 
 Authors
