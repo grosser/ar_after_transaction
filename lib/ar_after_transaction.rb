@@ -10,15 +10,10 @@ module ARAfterTransaction
     @@after_transaction_callbacks = []
 
     def transaction(*args, &block)
-      clean = true
       super
-    rescue Exception
-      clean = false
-      raise
     ensure
       unless transactions_open?
         callbacks = delete_after_transaction_callbacks
-        callbacks.each(&:call) if clean
       end
     end
 
@@ -38,8 +33,6 @@ module ARAfterTransaction
       @@normally_open_transactions = value
     end
 
-    private
-
     def transactions_open?
       connection.open_transactions > normally_open_transactions
     end
@@ -57,3 +50,29 @@ module ARAfterTransaction
 end
 
 ActiveRecord::Base.send(:include, ARAfterTransaction)
+
+module AfterCommit
+  module ActiveRecord
+    module ConnectionAdapters # :nodoc:
+      module DatabaseStatements
+
+        # Would prefer to hook into this method, but this doesn't get called because MySQLAdapter
+        # overrides the commit_db_transaction and doesn't call super so
+        # AbstractAdapter#commit_db_transaction doesn't get called.
+       #def commit_db_transaction(*args)
+       #  super
+       #end
+
+        def commit_transaction_records(*args)
+          super
+          callbacks = ::ActiveRecord::Base.delete_after_transaction_callbacks
+          callbacks.each(&:call)
+        end
+      end
+    end
+  end
+end
+
+ActiveRecord::ConnectionAdapters::AbstractAdapter.class_eval do
+  include AfterCommit::ActiveRecord::ConnectionAdapters::DatabaseStatements
+end

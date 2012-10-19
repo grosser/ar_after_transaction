@@ -15,29 +15,80 @@ and run `bundle install`.
 
 Usage
 =====
-### just-in-time callbacks
-    class User
-      after_create :do_stuff, :oops
 
-      def do_stuff
+### Define `after_transaction` callbacks anywhere within a transaction
+
+Inside of a model...
+
+    class User
+      after_create :deliver_created_notification, :create_log_entry, :something_else
+
+      def deliver_created_notification
         after_transaction do
-          send_an_email # cannot be rolled back
+          UserMailer.created(self).deliver  # Cannot be rolled back
         end
-        comments.create(...) # will be rolled back
       end
 
-      def oops
-        raise "do the rolback!"
+      def create_log_entry
+        entry = log_entries.create!(logged_changes: changes)  # This will be rolled back
+      end
+
+      def something_else
+        raise ActiveRecord::Rollback
       end
     end
 
-### General 'this should be rolled back when in a transaction' code like jobs
+    User.create!  # Won't deliver any e-mails because the transaction was rolled back
 
-    class Resque
-      def revertable_enqueue(*args)
+In this case, using the
+[`after_commit`](http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html#method-i-after_commit)
+callbacks provided by Active Record would have been an easier solution:
+
+    class User
+      after_commit :deliver_created_notification, :on => :create
+      after_commit :deliver_deleted_notification, :on => :destroy
+
+      def deliver_created_notification
+        UserMailer.created(self).deliver
+      end
+      def deliver_deleted_notification
+        UserMailer.deleted(self).deliver
+      end
+    end
+
+But there are some cases where an `after_commit` callback on a model won't work. This gem lets you
+define an inline `after_commit` callback for a transaction *anywhere*, even outside of a model. For
+example:
+
+    ActiveRecord::Base.transaction do
+      @import_file.each_row do |row|
+        thing = Thing.create!(row)
+
         ActiveRecord::Base.after_transaction do
+          send_notifications_for(thing)
+          thing.rebuild_thumbnails
+        end
+
+        if error_condition || user_wants_to_abort?
+          raise ActiveRecord::Rollback
+        end
+      end
+    end
+
+### Add `after_commit` callbacks around anything that should not happen if a transaction is rolled
+back
+
+    Resque.class_eval do
+      def self.enqueue_on_commit(*args)
+        ActiveRecord::Base.after_commit do
           enqueue(*args)
         end
+      end
+    end
+
+    Mail::Message.class_eval do
+      def deliver_on_commit
+        ActiveRecord::Base.after_transaction { deliver }
       end
     end
 
@@ -51,14 +102,6 @@ If you use transactional fixtures you should change it in test mode.
     # config/environments/test.rb
     config.after_initialize do
       ActiveRecord::Base.normally_open_transactions = 1
-    end
-
-### Rails 3: after_commit hook can replace the first usage example:
-
-    class User
-      after_commit :send_an_email :on=>:create
-      after_create :do_stuff, :oops
-      ...
     end
 
 Alternative
