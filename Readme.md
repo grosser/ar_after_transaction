@@ -7,6 +7,11 @@ Install
 
     gem install ar_after_transaction
 
+Add this line to your Gemfile:
+
+    gem 'ar_after_transaction'
+
+and run `bundle install`.
 
 Usage
 =====
