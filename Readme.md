@@ -2,6 +2,28 @@ Do something only after the currently open transactions have finished.
 
 Normally everything gets rolled back when a transaction fails, but you cannot roll back sending an email or adding a job to Resque.
 
+To illustrate this, suppose you had an `after_create` callback in your model that deliverd an
+e-mail:
+
+    class User
+      after_create :deliver_created_notification, :create_log_entry, :something_else
+
+      def deliver_created_notification
+        UserMailer.created(self).deliver  # Cannot be rolled back
+      end
+
+      def create_log_entry
+        entry = log_entries.create!(logged_changes: changes)  # This will be rolled back
+      end
+
+      def something_else
+        raise ActiveRecord::Rollback
+      end
+    end
+
+The e-mail in `deliver_created_notification` will get delivered when you call `User.create!` even
+though the Rollback in the `something_else` callback caused the record creation to be aborted.
+
 Install
 =======
 
@@ -25,7 +47,7 @@ Inside of a model...
 
       def deliver_created_notification
         after_transaction do
-          UserMailer.created(self).deliver  # Cannot be rolled back
+          UserMailer.created(self).deliver  # Will not be executed at all if the transaction is rolled back
         end
       end
 
@@ -40,19 +62,15 @@ Inside of a model...
 
     User.create!  # Won't deliver any e-mails because the transaction was rolled back
 
-In this case, using the
+In this case, simply using the
 [`after_commit`](http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html#method-i-after_commit)
-callbacks provided by Active Record would have been an easier solution:
+callbacks provided by Active Record might have been an easier solution:
 
     class User
       after_commit :deliver_created_notification, :on => :create
-      after_commit :deliver_deleted_notification, :on => :destroy
 
       def deliver_created_notification
         UserMailer.created(self).deliver
-      end
-      def deliver_deleted_notification
-        UserMailer.deleted(self).deliver
       end
     end
 
@@ -75,8 +93,43 @@ example:
       end
     end
 
-### Add `after_commit` callbacks around anything that should not happen if a transaction is rolled
-back
+### Add `after_commit` callbacks around anything that should not happen if a transaction is rolled back
+
+#### ActionMailer
+
+If you use ActionMailer, you can create a `deliver_on_commit` helper method:
+
+    Mail::Message.class_eval do
+      def deliver_on_commit
+        ActiveRecord::Base.after_transaction { deliver }
+      end
+    end
+
+which will allow you to do this:
+
+    UserMailer.created(self).deliver_on_commit
+
+This makes our original example even more concise
+
+    class User
+      after_create :deliver_created_notification
+
+      def deliver_created_notification
+        UserMailer.created(self).deliver_on_commit
+      end
+    end
+
+... which might even be clearer and better than using ActiveRecord's `after_commit` callbacks:
+
+    class User
+      after_commit :deliver_created_notification, :on => :create
+
+      def deliver_created_notification
+        UserMailer.created(self).deliver
+      end
+    end
+
+#### Resque
 
     Resque.class_eval do
       def self.enqueue_on_commit(*args)
@@ -86,11 +139,9 @@ back
       end
     end
 
-    Mail::Message.class_eval do
-      def deliver_on_commit
-        ActiveRecord::Base.after_transaction { deliver }
-      end
-    end
+will allow you to do this:
+
+    Resque.enqueue_on_commit(Archive, self.id)
 
 ### When not in a transaction
 after_transaction will perform the given block immediately
