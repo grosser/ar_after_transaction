@@ -1,9 +1,9 @@
 ActiveRecord::Base.establish_connection(
-  :adapter => "mysql", # need something that has transactions...
-  :database => "ar_after_transaction"
+  :adapter  => 'sqlite3',
+  :database => ':memory:'
 )
 
-ActiveRecord::Base.connection.execute('drop table if exists users')
+ActiveRecord::Migration.verbose = false
 ActiveRecord::Schema.define(:version => 1) do
   create_table :users do |t|
     t.string :name
@@ -11,6 +11,7 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 end
 
+# for detailed debugging:
 #require 'logger'
 #ActiveRecord::Base.logger = Logger.new(STDOUT)
 
