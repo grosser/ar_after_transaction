@@ -58,11 +58,16 @@ If you use transactional fixtures you should change it in test mode.
 
 Alternative
 ===========
+Rails 3+
+ - basic support is built in, use it if you can!
+ - `after_commit :foo`
+ - `after_commit :bar, :on => :create / :update`
+
 [after_commit](https://github.com/pat/after_commit)<br/>
- + threadsafe<br/>
- + more fine-grained callbacks (before_commit, `after_commit`, before_rollback, after_rollback)<br/>
- - doesn't let you define `after_transaction` callbacks *anywhere* like `ar_after_transaction` does (*outside* of the `after_commit`, etc. callbacks which only happen at certain points in the model's life cycle)<br/>
- - more complex<br/>
+ - pro: threadsafe<br/>
+ - pro: more fine-grained callbacks (before_commit, `after_commit`, before_rollback, after_rollback)<br/>
+ - con: doesn't let you define `after_transaction` callbacks *anywhere* like `ar_after_transaction` does (*outside* of the `after_commit`, etc. callbacks which only happen at certain points in the model's life cycle)<br/>
+ - con: more complex<br/>
 
 Authors
 =======
