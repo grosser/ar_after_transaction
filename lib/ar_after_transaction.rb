@@ -1,4 +1,5 @@
 require 'active_record'
+require 'ar_after_transaction/version'
 
 module ARAfterTransaction
   def self.included(base)
