@@ -5,8 +5,8 @@ task :spec do
 end
 
 task :default do
-  sh "RAILS='~>2' && (bundle || bundle install) && bundle exec rake spec"
-  sh "RAILS='~>3' && (bundle || bundle install) && bundle exec rake spec"
+  sh "export RAILS='~>2' && (bundle || bundle install) && bundle exec rake spec"
+  sh "export RAILS='~>3' && (bundle || bundle install) && bundle exec rake spec"
 end
 
 rule /^version:bump:.*/ do |t|
