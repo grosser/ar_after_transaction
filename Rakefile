@@ -1,12 +1,14 @@
-require 'bundler/gem_tasks'
+require "bundler/setup"
+require "bundler/gem_tasks"
+require "appraisal"
+
 
 task :spec do
   sh "rspec spec"
 end
 
 task :default do
-  sh "export RAILS='~>2' && (bundle || bundle install) && bundle exec rake spec"
-  sh "export RAILS='~>3' && (bundle || bundle install) && bundle exec rake spec"
+  sh "bundle exec rake appraisal:install && bundle exec rake appraisal spec"
 end
 
 # extracted from https://github.com/grosser/project_template

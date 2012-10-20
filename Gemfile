@@ -1,10 +1,8 @@
 source :rubygems
 
-puts ENV['RAILS']
+gemspec
 
-group :dev do
-  gem 'rake'
-  gem 'rspec', '~>2'
-  gem 'mysql'
-  gem 'activerecord', ENV['RAILS'] || '~>3', :require => 'active_record'
-end
+gem 'appraisal'
+gem 'rake'
+gem 'rspec', '~>2'
+gem 'mysql'
