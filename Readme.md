@@ -4,8 +4,7 @@ Normally everything gets rolled back when a transaction fails, but you cannot ro
 
 Install
 =======
-    rails plugin install git://github.com/grosser/ar_after_transaction
-or
+
     gem install ar_after_transaction
 
 
