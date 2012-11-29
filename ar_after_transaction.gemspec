@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'ar_after_transaction/version'
 
-Gem::Specification.new "ar_after_transaction", ARAfterTransaction::VERSION do |s|
+Gem::Specification.new "ar_after_transaction", ARAfterTransaction.version do |s|
   s.summary = "Execute irreversible actions only when transactions are not rolled back"
   s.authors = ["Michael Grosser"]
   s.email = "michael@grosser.it"
