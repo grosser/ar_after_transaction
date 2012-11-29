@@ -39,8 +39,8 @@ describe ARAfterTransaction do
     User.test_callbacks.clear
   end
 
-  it "has a VERSION" do
-    ARAfterTransaction::VERSION.should =~ /^\d+\.\d+\.\d+$/
+  it "has a version" do
+    ARAfterTransaction.version.should =~ /^\d+\.\d+\.\d+$/
   end
 
   it "executes after a transaction" do
@@ -117,5 +117,12 @@ describe ARAfterTransaction do
       User.normally_open_transactions = 5
       ActiveRecord::Base.normally_open_transactions.should == 5
     end
+  end
+end
+
+describe User do
+  it "does not have a VERSION" do
+    User.const_defined?(:VERSION).should be_false
+    User.const_defined?(:Version).should be_false
   end
 end
