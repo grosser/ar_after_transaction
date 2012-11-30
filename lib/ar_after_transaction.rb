@@ -2,10 +2,6 @@ require 'active_record'
 require 'ar_after_transaction/version'
 
 module ARAfterTransaction
-  def self.included(base)
-    base.extend(ClassMethods)
-  end
-
   module ClassMethods
     @@after_transaction_callbacks = []
 
@@ -51,9 +47,12 @@ module ARAfterTransaction
     end
   end
 
-  def after_transaction(&block)
-    self.class.after_transaction(&block)
+  module InstanceMethods
+    def after_transaction(&block)
+      self.class.after_transaction(&block)
+    end
   end
 end
 
-ActiveRecord::Base.send(:include, ARAfterTransaction)
+ActiveRecord::Base.send(:extend, ARAfterTransaction::ClassMethods)
+ActiveRecord::Base.send(:include, ARAfterTransaction::InstanceMethods)
