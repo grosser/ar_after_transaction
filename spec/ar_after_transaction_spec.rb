@@ -29,6 +29,10 @@ class User
   def oops
     raise AnExpectedError
   end
+
+  def raise_rollback
+    raise ActiveRecord::Rollback
+  end
 end
 
 describe ARAfterTransaction do
@@ -57,7 +61,24 @@ describe ARAfterTransaction do
     User.test_stack.should == [:normal]
   end
 
-  it "clears transation callbacks when transaction fails" do
+  it "does not execute when transaction gets rolled back by ActiveRecord::Rollback raised in an after_create callback" do
+    User.test_callbacks = [:do_after, :do_normal, :raise_rollback]
+    user = User.create!
+    User.test_stack.should == [:normal]
+    user.should be_new_record
+  end
+
+  it "does not execute when transaction gets rolled back by ActiveRecord::Rollback outside of the model" do
+    User.test_callbacks = [:do_after, :do_normal]
+    user = nil
+    ActiveRecord::Base.transaction do
+      user = User.create!
+      raise ActiveRecord::Rollback
+    end
+    User.test_stack.should == [:normal]
+  end
+
+  it "clears transaction callbacks when transaction fails" do
     User.test_callbacks = [:do_after, :do_normal, :oops]
     lambda{
       User.create!

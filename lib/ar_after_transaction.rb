@@ -3,9 +3,16 @@ require 'ar_after_transaction/version'
 
 module ARAfterTransaction
   module ClassMethods
-    def transaction(*args, &block)
+    def transaction(*args)
       clean = true
-      super
+      super(*args) do
+        begin
+          yield
+        rescue ActiveRecord::Rollback
+          clean = false
+          raise
+        end
+      end
     rescue Exception
       clean = false
       raise
