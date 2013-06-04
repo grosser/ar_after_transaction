@@ -65,7 +65,6 @@ describe ARAfterTransaction do
     User.test_callbacks = [:do_after, :do_normal, :raise_rollback]
     user = User.create!
     User.test_stack.should == [:normal]
-    user.should be_new_record
   end
 
   it "does not execute when transaction gets rolled back by ActiveRecord::Rollback outside of the model" do
