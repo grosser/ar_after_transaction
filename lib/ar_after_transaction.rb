@@ -3,8 +3,6 @@ require 'ar_after_transaction/version'
 
 module ARAfterTransaction
   module ClassMethods
-    @@after_transaction_callbacks = []
-
     def transaction(*args, &block)
       clean = true
       super
@@ -20,18 +18,19 @@ module ARAfterTransaction
 
     def after_transaction(&block)
       if transactions_open?
-        @@after_transaction_callbacks << block
+        connection.after_transaction_callbacks ||= []
+        connection.after_transaction_callbacks << block
       else
         yield
       end
     end
 
     def normally_open_transactions
-      @@normally_open_transactions ||= 0
+      connection.normally_open_transactions ||= 0
     end
 
     def normally_open_transactions=(value)
-      @@normally_open_transactions = value
+      connection.normally_open_transactions = value
     end
 
     private
@@ -41,8 +40,8 @@ module ARAfterTransaction
     end
 
     def delete_after_transaction_callbacks
-      result = @@after_transaction_callbacks
-      @@after_transaction_callbacks = []
+      result = connection.after_transaction_callbacks || []
+      connection.after_transaction_callbacks = []
       result
     end
   end
@@ -54,5 +53,15 @@ module ARAfterTransaction
   end
 end
 
+module ARAfterTransactionConnection
+  def self.included(base)
+    base.class_eval do
+      attr_accessor :normally_open_transactions
+      attr_accessor :after_transaction_callbacks
+    end
+  end
+end
+
 ActiveRecord::Base.send(:extend, ARAfterTransaction::ClassMethods)
 ActiveRecord::Base.send(:include, ARAfterTransaction::InstanceMethods)
+ActiveRecord::ConnectionAdapters::AbstractAdapter.send(:include, ARAfterTransactionConnection)
