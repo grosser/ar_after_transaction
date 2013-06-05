@@ -1,11 +1,11 @@
 PATH
   remote: /Users/mgrosser/code/tools/ar_after_transaction
   specs:
-    ar_after_transaction (0.2.5)
+    ar_after_transaction (0.2.6)
       activerecord
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activemodel (3.2.8)
       activesupport (= 3.2.8)
