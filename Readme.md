@@ -77,7 +77,7 @@ Authors
  - [Bogdan Gusiev](http://gusiev.com)
  - [Benedikt Deicke](http://blog.synatic.net)
  - [Tyler Rick](https://github.com/TylerRick)
- - [michaelmwu](https://github.com/michaelmwu)
+ - [Michael Wu](https://github.com/michaelmwu)
 
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>

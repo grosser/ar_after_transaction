@@ -3,9 +3,18 @@ require 'ar_after_transaction/version'
 
 module ARAfterTransaction
   module ClassMethods
-    def transaction(*args)
+    def self.extended( base )
+      base.class_eval do
+        class << self
+          alias_method :transaction_without_after, :transaction
+          alias_method :transaction, :transaction_with_after
+        end
+      end
+    end
+
+    def transaction_with_after(*args)
       clean = true
-      super(*args) do
+      transaction_without_after(*args) do
         begin
           yield
         rescue ActiveRecord::Rollback
