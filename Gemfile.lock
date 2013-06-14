@@ -3,11 +3,14 @@ PATH
   specs:
     ar_after_transaction (0.3.0)
       activerecord
-      railties
+      rails
 
 GEM
   remote: https://rubygems.org/
   specs:
+    actionmailer (3.2.13)
+      actionpack (= 3.2.13)
+      mail (~> 2.5.3)
     actionpack (3.2.13)
       activemodel (= 3.2.13)
       activesupport (= 3.2.13)
@@ -26,6 +29,9 @@ GEM
       activesupport (= 3.2.13)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activeresource (3.2.13)
+      activemodel (= 3.2.13)
+      activesupport (= 3.2.13)
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
@@ -37,11 +43,16 @@ GEM
     bump (0.3.5)
     diff-lcs (1.1.3)
     erubis (2.7.0)
-    hike (1.2.2)
+    hike (1.2.3)
     i18n (0.6.1)
     journey (1.0.4)
     json (1.8.0)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.23)
     multi_json (1.7.6)
+    polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -49,6 +60,14 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rails (3.2.13)
+      actionmailer (= 3.2.13)
+      actionpack (= 3.2.13)
+      activerecord (= 3.2.13)
+      activeresource (= 3.2.13)
+      activesupport (= 3.2.13)
+      bundler (~> 1.0)
+      railties (= 3.2.13)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -75,6 +94,9 @@ GEM
     sqlite3 (1.3.6)
     thor (0.18.1)
     tilt (1.4.1)
+    treetop (1.4.12)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (0.3.37)
 
 PLATFORMS
