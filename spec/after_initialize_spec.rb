@@ -1,8 +1,17 @@
-require 'rails'
 require 'active_record'
 require File.expand_path '../setup_database', __FILE__
 
-if Rails::VERSION::MAJOR >= 3
+railtie = false
+
+begin
+  require 'action_controller/railtie'
+  railtie = true
+rescue LoadError
+  puts 'Railtie not loaded, skipping test'
+end
+
+if railtie
+
   module Passthrough
     def self.extended( base )
       base.class_eval do
