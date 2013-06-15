@@ -8,5 +8,6 @@ gem "rake"
 gem "rspec", "~>2"
 gem "sqlite3"
 gem "activerecord", "~>3.2.7"
+gem "railties", "~>3.2.7"
 
 gemspec :path=>"../"

@@ -1,7 +1,7 @@
 PATH
-  remote: /Users/mgrosser/code/tools/ar_after_transaction
+  remote: /Users/mmwu/ar_after_transaction
   specs:
-    ar_after_transaction (0.2.6)
+    ar_after_transaction (0.3.0)
       activerecord
 
 GEM
