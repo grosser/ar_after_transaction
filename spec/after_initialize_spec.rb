@@ -1,16 +1,10 @@
 require 'active_record'
 require File.expand_path '../setup_database', __FILE__
 
-railtie = false
-
-begin
+if ActiveRecord::VERSION::MAJOR > 2
   require 'action_controller/railtie'
-  railtie = true
-rescue LoadError
-  puts 'Railtie not loaded, skipping test'
-end
 
-if railtie
+  Rack::Session::Cookie
 
   module Passthrough
     def self.extended( base )
@@ -42,9 +36,9 @@ if railtie
       end
     end
   end
-   
-  # Initialize the application
-  ARAfterTransaction::Application.initialize!
+
+  Rack::Session::Cookie.send(:define_method, :warn){|_|} # seilence secret warning
+  ARAfterTransaction::Application.initialize! # initialize app
 
   class AnExpectedError < Exception
   end

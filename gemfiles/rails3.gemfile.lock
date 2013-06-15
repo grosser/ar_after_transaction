@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/mmwu/ar_after_transaction
+  remote: /Users/mgrosser/code/tools/ar_after_transaction
   specs:
     ar_after_transaction (0.3.0)
       activerecord
@@ -83,7 +83,7 @@ DEPENDENCIES
   appraisal
   ar_after_transaction!
   bump
-  railties (~> 3.2.7)
+  railties
   rake
   rspec (~> 2)
   sqlite3
