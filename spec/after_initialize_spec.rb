@@ -1,7 +1,7 @@
 require 'active_record'
 require File.expand_path '../setup_database', __FILE__
 
-if ActiveRecord::VERSION::MAJOR > 2
+if ActiveRecord::VERSION::MAJOR > 2 && ActiveRecord::VERSION::MAJOR < 4
   require 'action_controller/railtie'
 
   Rack::Session::Cookie
