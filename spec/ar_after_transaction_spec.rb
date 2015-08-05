@@ -142,7 +142,7 @@ end
 
 describe "A normal ActiveRecord subclass" do
   it "does not get polluted" do
-    User.const_defined?(:VERSION).should be_false
-    User.const_defined?(:Version).should be_false
+    User.const_defined?(:VERSION).should be false
+    User.const_defined?(:Version).should be false
   end
 end
