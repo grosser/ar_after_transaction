@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ../
   specs:
     ar_after_transaction (0.4.0)
       activerecord
@@ -87,6 +87,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord (~> 4.2.3)
   appraisal
   ar_after_transaction!
   bump

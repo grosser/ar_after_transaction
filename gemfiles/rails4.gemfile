@@ -7,6 +7,6 @@ gem "bump"
 gem "rake"
 gem "rspec", "~>2"
 gem "sqlite3"
-gem "activerecord", "~>2.3.14"
+gem "activerecord", "~>4.2.3"
 
-gemspec :path=>"../"
+gemspec :path => "../"
