@@ -8,5 +8,7 @@ Gem::Specification.new "ar_after_transaction", ARAfterTransaction::VERSION do |s
   s.homepage = "http://github.com/grosser/ar_after_transaction"
   s.files = `git ls-files`.split("\n")
   s.add_runtime_dependency "activerecord"
+  s.add_runtime_dependency "rack"
+  s.add_runtime_dependency "railties"
   s.license = "MIT"
 end
