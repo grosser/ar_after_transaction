@@ -1,3 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/ar_after_transaction.png)](http://badge.fury.io/rb/ar_after_transaction)
+[![Build Status](https://travis-ci.org/grosser/ar_after_transaction.png)](https://travis-ci.org/grosser/ar_after_transaction)
+[![Dependency Status](https://gemnasium.com/grosser/ar_after_transaction.png)](https://gemnasium.com/grosser/ar_after_transaction)
+
 Do something only after the currently open transactions have finished.
 
 Normally everything gets rolled back when a transaction fails, but you cannot roll back sending an email or adding a job to Resque.
@@ -82,5 +86,4 @@ Authors
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
 License: MIT<br/>
-[![Build Status](https://travis-ci.org/grosser/ar_after_transaction.png)](https://travis-ci.org/grosser/ar_after_transaction)
 
