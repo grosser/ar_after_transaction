@@ -32,6 +32,7 @@ if ActiveRecord::VERSION::MAJOR > 2
 
   module ARAfterTransaction
     class Application < ::Rails::Application
+      config.eager_load = false
       config.active_support.deprecation = :log
 
       config.after_initialize do
