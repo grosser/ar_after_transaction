@@ -83,6 +83,7 @@ Authors
  - [Tyler Rick](https://github.com/TylerRick)
  - [Michael Wu](https://github.com/michaelmwu)
  - [C.W.](https://github.com/compwron)
+ - [Ben Weintraub](https://github.com/benweint)
 
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
