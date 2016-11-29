@@ -119,6 +119,19 @@ describe ARAfterTransaction do
     User.test_stack.should == [:normal, :normal]
   end
 
+  it "does not establish a DB connection when one isn't already active for the current thread" do
+    executed = false
+    expect(User.connection_pool).not_to receive(:checkout)
+
+    Thread.new {
+      User.after_transaction do
+        executed = true
+      end
+    }.join
+
+    expect(executed).to be true
+  end
+
   it "does not crash with additional options" do
     User.transaction(:requires_new => true){}
   end

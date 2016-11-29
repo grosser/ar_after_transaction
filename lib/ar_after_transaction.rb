@@ -52,6 +52,8 @@ module ARAfterTransaction
     private
 
     def transactions_open?
+      pool = connection_pool
+      return false unless pool && pool.active_connection?
       connection.open_transactions > normally_open_transactions
     end
 
