@@ -8,4 +8,5 @@ gemfile:
  - gemfiles/rails3.gemfile
  - gemfiles/rails4.gemfile
  - gemfiles/rails5.gemfile
+ - gemfiles/rails5_1.gemfile
 script: bundle exec rake spec
