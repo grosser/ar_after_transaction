@@ -13,6 +13,15 @@ class User
     self.class.test_callbacks.map{|callback| send(callback)}.last
   end
 
+  def do_before
+    before_transaction_commit do
+      ActiveRecord::Base.transaction do
+        # nested transaction should not cause infinitive recursion
+      end
+      self.class.test_stack << :before
+    end
+  end
+
   def do_after
     after_transaction do
       ActiveRecord::Base.transaction do
@@ -53,8 +62,14 @@ describe ARAfterTransaction do
     User.test_stack.should == [:normal, :after]
   end
 
+  it "executes before commit" do
+    User.test_callbacks = [:do_after, :do_before, :do_normal]
+    User.create!
+    User.test_stack.should == [:normal, :before, :after]
+  end
+
   it "does not execute when transaction was rolled back" do
-    User.test_callbacks = [:do_after, :do_normal, :oops]
+    User.test_callbacks = [:do_after, :do_before, :do_normal, :oops]
     lambda{
       User.create!
     }.should raise_error(AnExpectedError)
@@ -62,13 +77,13 @@ describe ARAfterTransaction do
   end
 
   it "does not execute when transaction gets rolled back by ActiveRecord::Rollback raised in an after_create callback" do
-    User.test_callbacks = [:do_after, :do_normal, :raise_rollback]
+    User.test_callbacks = [:do_after, :do_before, :do_normal, :raise_rollback]
     user = User.create!
     User.test_stack.should == [:normal]
   end
 
   it "does not execute when transaction gets rolled back by ActiveRecord::Rollback outside of the model" do
-    User.test_callbacks = [:do_after, :do_normal]
+    User.test_callbacks = [:do_after, :do_before, :do_normal]
     user = nil
     ActiveRecord::Base.transaction do
       user = User.create!
@@ -78,7 +93,7 @@ describe ARAfterTransaction do
   end
 
   it "clears transaction callbacks when transaction fails" do
-    User.test_callbacks = [:do_after, :do_normal, :oops]
+    User.test_callbacks = [:do_after, :do_before, :do_normal, :oops]
     lambda{
       User.create!
     }.should raise_error(AnExpectedError)
@@ -90,26 +105,27 @@ describe ARAfterTransaction do
   it "executes when no transaction is open" do
     user = User.new
     user.do_after
+    user.do_before
     user.do_normal
-    User.test_stack.should == [:after, :normal]
+    User.test_stack.should == [:after, :before, :normal]
   end
 
   it "executes when open transactions are normal" do
     User.normally_open_transactions = 1
-    User.test_callbacks = [:do_after, :do_normal]
+    User.test_callbacks = [:do_after, :do_before, :do_normal]
     User.create!
-    User.test_stack.should == [:after, :normal]
+    User.test_stack.should == [:after, :before, :normal]
   end
 
   it "does not execute the same callback twice when successful" do
-    User.test_callbacks = [:do_after, :do_normal]
+    User.test_callbacks = [:do_after, :do_before, :do_normal]
     User.create!
     User.create!
-    User.test_stack.should == [:normal, :after, :normal, :after]
+    User.test_stack.should == [:normal, :before, :after, :normal, :before, :after]
   end
 
   it "does not execute the same callback twice when failed" do
-    User.test_callbacks = [:do_after, :do_normal, :oops]
+    User.test_callbacks = [:do_after, :do_before, :do_normal, :oops]
     lambda{
       User.create!
     }.should raise_error(AnExpectedError)

@@ -1,3 +1,3 @@
 module ARAfterTransaction
-  VERSION = Version = '0.4.1'
+  VERSION = Version = '0.5.0'
 end
