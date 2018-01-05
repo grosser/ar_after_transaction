@@ -15,8 +15,22 @@ gemfile:
 matrix:
   exclude:
     - gemfile: gemfiles/rails3.gemfile
-      rvm: [2.3, 2.4, 2.5]
+      rvm: 2.3
+    - gemfile: gemfiles/rails3.gemfile
+      rvm: 2.4
+    - gemfile: gemfiles/rails3.gemfile
+      rvm: 2.5
+
     - gemfile: gemfiles/rails5.0.gemfile
-      rvm: [2.0, 2.1, 2.2]
+      rvm: 2.0
+    - gemfile: gemfiles/rails5.0.gemfile
+      rvm: 2.1
+    - gemfile: gemfiles/rails5.0.gemfile
+      rvm: 2.2
+
     - gemfile: gemfiles/rails5.1.gemfile
-      rvm: [2.0, 2.1, 2.2]
+      rvm: 2.0
+    - gemfile: gemfiles/rails5.1.gemfile
+      rvm: 2.1
+    - gemfile: gemfiles/rails5.1.gemfile
+      rvm: 2.2
