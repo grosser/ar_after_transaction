@@ -1,2 +1,3 @@
-log
-vendor
+/gemfiles/.bundle
+/log
+/vendor/bundle
