@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 
-gem "activerecord", "~>4.2.3"
-gem 'json', '~>1.8.6'
+gem "activerecord", "~>5.0.3"
 
 gemspec path: "../"
