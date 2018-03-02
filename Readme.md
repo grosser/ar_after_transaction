@@ -66,6 +66,8 @@ Rails 3+
  - basic support is built in, use it if you can!
  - `after_commit :foo`
  - `after_commit :bar, :on => :create / :update`
+ - [after_commit everywhere](https://dev.to/evilmartians/rails-aftercommit-everywhere--4j9g)
+
 
 [after_commit](https://github.com/pat/after_commit)<br/>
  - pro: threadsafe<br/>
