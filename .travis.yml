@@ -3,8 +3,6 @@ before_install: gem update --system
 script: bundle exec rake spec
 sudo: false
 rvm:
-  - 2.0
-  - 2.1
   - 2.2
   - 2.3
   - 2.4
@@ -30,18 +28,12 @@ matrix:
       rvm: 2.5
 
     - gemfile: gemfiles/rails5.0.gemfile
-      rvm: 2.0
-    - gemfile: gemfiles/rails5.0.gemfile
-      rvm: 2.1
-    - gemfile: gemfiles/rails5.0.gemfile
       rvm: 2.2
 
-    - gemfile: gemfiles/rails5.1.gemfile
-      rvm: 2.0
-    - gemfile: gemfiles/rails5.1.gemfile
-      rvm: 2.1
     - gemfile: gemfiles/rails5.1.gemfile
       rvm: 2.2
 
     - gemfile: gemfiles/rails5.2.gemfile
       rvm: 2.2
+    - gemfile: gemfiles/rails5.2.gemfile
+      rvm: 2.5
