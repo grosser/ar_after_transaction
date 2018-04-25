@@ -35,5 +35,3 @@ matrix:
 
     - gemfile: gemfiles/rails5.2.gemfile
       rvm: 2.2
-    - gemfile: gemfiles/rails5.2.gemfile
-      rvm: 2.5
