@@ -1,6 +1,6 @@
 require 'active_record'
-require'rails'
-require File.expand_path '../setup_database', __FILE__
+require 'rails'
+require_relative 'setup_database'
 
 if ActiveRecord::VERSION::MAJOR > 2
   if ActiveRecord::VERSION::MAJOR < 4
