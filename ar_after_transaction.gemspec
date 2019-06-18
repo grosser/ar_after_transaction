@@ -6,8 +6,8 @@ Gem::Specification.new "ar_after_transaction", ARAfterTransaction::VERSION do |s
   s.email = "michael@grosser.it"
   s.homepage = "http://github.com/grosser/ar_after_transaction"
   s.files = `git ls-files lib Readme.md`.split("\n")
-  s.required_ruby_version = '>= 2.2.0'
-  s.add_runtime_dependency "activerecord", "> 3.2.0", "< 5.3"
+  s.required_ruby_version = '>= 2.4.0'
+  s.add_runtime_dependency "activerecord", ">= 4.2.0", "< 5.3"
   s.add_development_dependency "wwtd"
   s.add_development_dependency "bump"
   s.add_development_dependency "rake"

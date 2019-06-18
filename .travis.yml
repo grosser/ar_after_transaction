@@ -1,39 +1,11 @@
-# https://github.com/travis-ci/travis-ci/issues/8978
-before_install:
-  - gem update --system
-  - gem install bundler
-script: bundle exec rake spec
-sudo: false
+before_install: gem install matching_bundle && matching_bundle install
+script: matching_bundle exec rake spec
+branches:
+  only: master
 rvm:
-  - 2.2
-  - 2.3
-  - 2.4
-  - 2.5
+- 2.4
+- 2.5
+- 2.6
 gemfile:
-  - gemfiles/rails3.gemfile
-  - gemfiles/rails4.gemfile
-  - gemfiles/rails5.0.gemfile
-  - gemfiles/rails5.1.gemfile
-  - gemfiles/rails5.2.gemfile
-matrix:
-  exclude:
-    - gemfile: gemfiles/rails3.gemfile
-      rvm: 2.3
-    - gemfile: gemfiles/rails3.gemfile
-      rvm: 2.4
-    - gemfile: gemfiles/rails3.gemfile
-      rvm: 2.5
-
-    - gemfile: gemfiles/rails4.gemfile
-      rvm: 2.4
-    - gemfile: gemfiles/rails4.gemfile
-      rvm: 2.5
-
-    - gemfile: gemfiles/rails5.0.gemfile
-      rvm: 2.2
-
-    - gemfile: gemfiles/rails5.1.gemfile
-      rvm: 2.2
-
-    - gemfile: gemfiles/rails5.2.gemfile
-      rvm: 2.2
+- gemfiles/rails4.2.gemfile
+- gemfiles/rails5.2.gemfile
