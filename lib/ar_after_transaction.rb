@@ -12,9 +12,9 @@ module ARAfterTransaction
       end
     end
 
-    def transaction_with_after(*args)
+    def transaction_with_after(**args)
       clean = true
-      transaction_without_after(*args) do
+      transaction_without_after(**args) do
         begin
           yield
         rescue ActiveRecord::Rollback
