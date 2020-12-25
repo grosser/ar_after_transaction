@@ -89,9 +89,9 @@ if ActiveRecord::VERSION::MAJOR > 2
     end
 
     it 'executes after a transaction' do
-      User.test_callbacks = %i[do_after do_normal]
+      User.test_callbacks = [:do_after, :do_normal]
       User.create!
-      expect(User.test_stack).to eq %i[normal after]
+      expect(User.test_stack).to eq [:normal, :after]
     end
   end
 end

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
 require 'active_record'
 require 'ar_after_transaction/version'
 

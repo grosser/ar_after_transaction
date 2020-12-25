@@ -49,26 +49,26 @@ describe ARAfterTransaction do
   end
 
   it 'executes after a transaction' do
-    User.test_callbacks = %i[do_after do_normal]
+    User.test_callbacks = [:do_after, :do_normal]
     User.create!
-    expect(User.test_stack).to eq %i[normal after]
+    expect(User.test_stack).to eq [:normal, :after]
   end
 
   it 'does not execute when transaction was rolled back' do
-    User.test_callbacks = %i[do_after do_normal oops]
+    User.test_callbacks = [:do_after, :do_normal, :oops]
     expect(-> { User.create! }).to raise_error(AnExpectedError)
     expect(User.test_stack).to eq [:normal]
   end
 
   it 'does not execute when transaction gets rolled back by ActiveRecord::Rollback '\
      'raised in an after_create callback' do
-    User.test_callbacks = %i[do_after do_normal raise_rollback]
+    User.test_callbacks = [:do_after, :do_normal, :raise_rollback]
     User.create!
     expect(User.test_stack).to eq [:normal]
   end
 
   it 'does not execute when transaction gets rolled back by ActiveRecord::Rollback outside of the model' do
-    User.test_callbacks = %i[do_after do_normal]
+    User.test_callbacks = [:do_after, :do_normal]
     user = nil
     ActiveRecord::Base.transaction do
       user = User.create!
@@ -78,39 +78,39 @@ describe ARAfterTransaction do
   end
 
   it 'clears transaction callbacks when transaction fails' do
-    User.test_callbacks = %i[do_after do_normal oops]
+    User.test_callbacks = [:do_after, :do_normal, :oops]
     expect(-> { User.create! }).to raise_error(AnExpectedError)
     User.test_callbacks = [:do_normal]
     User.create!
-    expect(User.test_stack).to eq %i[normal normal]
+    expect(User.test_stack).to eq [:normal, :normal]
   end
 
   it 'executes when no transaction is open' do
     user = User.new
     user.do_after
     user.do_normal
-    expect(User.test_stack).to eq %i[after normal]
+    expect(User.test_stack).to eq [:after, :normal]
   end
 
   it 'executes when open transactions are normal' do
     User.normally_open_transactions = 1
-    User.test_callbacks = %i[do_after do_normal]
+    User.test_callbacks = [:do_after, :do_normal]
     User.create!
-    expect(User.test_stack).to eq %i[after normal]
+    expect(User.test_stack).to eq [:after, :normal]
   end
 
   it 'does not execute the same callback twice when successful' do
-    User.test_callbacks = %i[do_after do_normal]
+    User.test_callbacks = [:do_after, :do_normal]
     User.create!
     User.create!
-    expect(User.test_stack).to eq %i[normal after normal after]
+    expect(User.test_stack).to eq [:normal, :after, :normal, :after]
   end
 
   it 'does not execute the same callback twice when failed' do
-    User.test_callbacks = %i[do_after do_normal oops]
+    User.test_callbacks = [:do_after, :do_normal, :oops]
     expect(-> { User.create! }).to raise_error(AnExpectedError)
     expect(-> { User.create! }).to raise_error(AnExpectedError)
-    expect(User.test_stack).to eq %i[normal normal]
+    expect(User.test_stack).to eq [:normal, :normal]
   end
 
   it 'does not crash with additional options' do

@@ -11,8 +11,6 @@ Gem::Specification.new 'ar_after_transaction', ARAfterTransaction::VERSION do |s
   s.required_ruby_version = '>= 2.4.0'
   s.add_runtime_dependency 'activerecord', '>= 4.2.0', '< 6.2'
   s.add_development_dependency 'bump'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 3'
