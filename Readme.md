@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/ar_after_transaction.png)](http://badge.fury.io/rb/ar_after_transaction)
-![CI](https://github.com/zendesk/ar_after_transaction/workflows/CI/badge.svg)
+![CI](https://github.com/grosser/ar_after_transaction/workflows/CI/badge.svg)
 
 Do something only after the currently open transactions have finished.
 
