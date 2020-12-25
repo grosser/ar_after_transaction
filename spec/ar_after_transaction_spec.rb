@@ -117,14 +117,16 @@ describe ARAfterTransaction do
     expect(-> { User.transaction(requires_new: true) { true } }).not_to raise_error
   end
 
-  describe :normally_open_transactions do
+  describe '.normally_open_transactions' do
+    subject(:transactions) { User.normally_open_transactions }
+
     it 'uses 0 by default' do
-      expect(User.normally_open_transactions).to eq 0
+      expect(transactions).to eq 0
     end
 
     it 'can set normally open transactions' do
       User.normally_open_transactions = 5
-      expect(User.normally_open_transactions).to eq 5
+      expect(transactions).to eq 5
     end
 
     it 'sets them globally' do
@@ -137,6 +139,5 @@ end
 describe 'A normal ActiveRecord subclass' do
   it 'does not get polluted' do
     expect(User.const_defined?('VERSION')).to be_falsey
-    expect(User.const_defined?('Version')).to be_falsey
   end
 end
