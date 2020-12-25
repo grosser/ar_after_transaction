@@ -98,6 +98,7 @@ Authors
  - [Michael Wu](https://github.com/michaelmwu)
  - [C.W.](https://github.com/compwron)
  - [Ben Weintraub](https://github.com/benweint)
+ - [Vladimir Temnikov](https://github.com/vladimirtemnikov)
 
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
