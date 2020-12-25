@@ -1,8 +1,8 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "activerecord", "~>4.2.3"
-gem "rails", "~>4.2.3" # need to set this or bundler can resolve rails 0.9.5
-gem 'json', "~>1.8.6"
-gem "sqlite3", "~>1.3.6" # otherwise AR blows up
+gem 'activerecord', '~>4.2.3'
+gem 'json', '~>1.8.6'
+gem 'rails', '~>4.2.3' # need to set this or bundler can resolve rails 0.9.5
+gem 'sqlite3', '~>1.3.6' # otherwise AR blows up
 
-gemspec path: "../"
+gemspec path: '../'
