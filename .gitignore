@@ -1,3 +1,5 @@
+.bundle
+.ruby-version
 /gemfiles/.bundle
 /log
 /vendor/bundle

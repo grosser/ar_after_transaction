@@ -1,16 +1,14 @@
+# frozen_string_literal: true
+
 require 'active_record'
 require 'rails'
 require_relative 'setup_database'
 
 if ActiveRecord::VERSION::MAJOR > 2
-  if ActiveRecord::VERSION::MAJOR < 4
-    require 'action_controller/railtie'
-  end
-
-  Rack::Session::Cookie
+  require 'action_controller/railtie' if ActiveRecord::VERSION::MAJOR < 4
 
   module Passthrough
-    def self.extended( base )
+    def self.extended(base)
       base.class_eval do
         class << self
           alias_method :transaction_without_passthrough, :transaction
@@ -26,7 +24,7 @@ if ActiveRecord::VERSION::MAJOR > 2
 
   class Railtie < ::Rails::Railtie
     config.after_initialize do
-      ActiveRecord::Base.send(:extend, Passthrough)
+      ActiveRecord::Base.extend Passthrough
     end
   end
 
@@ -41,11 +39,10 @@ if ActiveRecord::VERSION::MAJOR > 2
     end
   end
 
-  Rack::Session::Cookie.send(:define_method, :warn){|_|} # seilence secret warning
+  Rack::Session::Cookie.send(:define_method, :warn) { |_| } # silence secret warning
   ARAfterTransaction::Application.initialize! # initialize app
 
-  class AnExpectedError < Exception
-  end
+  class AnExpectedError < RuntimeError; end
 
   class User
     cattr_accessor :test_callbacks, :test_stack
@@ -54,7 +51,7 @@ if ActiveRecord::VERSION::MAJOR > 2
 
     after_create :do_it
     def do_it
-      self.class.test_callbacks.map{|callback| send(callback)}.last
+      self.class.test_callbacks.map { |callback| send(callback) }.last
     end
 
     def do_after
@@ -82,19 +79,19 @@ if ActiveRecord::VERSION::MAJOR > 2
   describe ARAfterTransaction do
     before do
       User.normally_open_transactions = nil
-      User.send(:transactions_open?).should == false
+      expect(User.send(:transactions_open?)).to be_falsey
       User.test_stack.clear
       User.test_callbacks.clear
     end
 
-    it "has a VERSION" do
-      ARAfterTransaction::VERSION.should =~ /^\d+\.\d+\.\d+$/
+    it 'has a VERSION' do
+      expect(ARAfterTransaction::VERSION).to match(/^\d+\.\d+\.\d+$/)
     end
 
-    it "executes after a transaction" do
-      User.test_callbacks = [:do_after, :do_normal]
+    it 'executes after a transaction' do
+      User.test_callbacks = %i[do_after do_normal]
       User.create!
-      User.test_stack.should == [:normal, :after]
+      expect(User.test_stack).to eq %i[normal after]
     end
   end
 end
