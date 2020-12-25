@@ -1,6 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/ar_after_transaction.png)](http://badge.fury.io/rb/ar_after_transaction)
-[![Build Status](https://travis-ci.org/grosser/ar_after_transaction.png)](https://travis-ci.org/grosser/ar_after_transaction)
-[![Dependency Status](https://gemnasium.com/grosser/ar_after_transaction.png)](https://gemnasium.com/grosser/ar_after_transaction)
+![CI](https://github.com/zendesk/ar_after_transaction/workflows/CI/badge.svg)
 
 Do something only after the currently open transactions have finished.
 
