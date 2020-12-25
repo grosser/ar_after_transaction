@@ -8,36 +8,44 @@ Normally everything gets rolled back when a transaction fails, but you cannot ro
 Install
 =======
 
-    gem install ar_after_transaction
+```bash
+gem install ar_after_transaction
+```
 
 
 Usage
 =====
+
 ### just-in-time callbacks
-    class User
-      after_create :do_stuff, :oops
 
-      def do_stuff
-        after_transaction do
-          send_an_email # cannot be rolled back
-        end
-        comments.create(...) # will be rolled back
-      end
+```ruby
+class User
+  after_create :do_stuff, :oops
 
-      def oops
-        raise "do the rolback!"
-      end
+  def do_stuff
+    after_transaction do
+      send_an_email # cannot be rolled back
     end
+    comments.create(...) # will be rolled back
+  end
+
+  def oops
+    raise "do the rolback!"
+  end
+end
+```
 
 ### General 'this should be rolled back when in a transaction' code like jobs
 
-    class Resque
-      def revertable_enqueue(*args)
-        ActiveRecord::Base.after_transaction do
-          enqueue(*args)
-        end
-      end
+```ruby
+class Resque
+  def revertable_enqueue(*args)
+    ActiveRecord::Base.after_transaction do
+      enqueue(*args)
     end
+  end
+end
+```
 
 ### When not in a transaction
 after_transaction will perform the given block immediately
@@ -46,25 +54,30 @@ after_transaction will perform the given block immediately
 after_transaction assumes zero open transactions.<br/>
 If you use transactional fixtures you should change it in test mode.
 
-    # config/environments/test.rb
-    config.after_initialize do
-      ActiveRecord::Base.normally_open_transactions = 1
-    end
+```ruby
+# config/environments/test.rb
+config.after_initialize do
+  ActiveRecord::Base.normally_open_transactions = 1
+end
+```
 
 ### Rails 3: after_commit hook can replace the first usage example:
 
-    class User
-      after_commit :send_an_email :on=>:create
-      after_create :do_stuff, :oops
-      ...
-    end
+```ruby
+class User
+  after_commit :send_an_email on: :create
+  after_create :do_stuff, :oops
+  ...
+end
+```
 
 Alternative
 ===========
+
 Rails 3+
  - basic support is built in, use it if you can!
  - `after_commit :foo`
- - `after_commit :bar, :on => :create / :update`
+ - `after_commit :bar, on: :create / :update`
  - [after_commit everywhere](https://dev.to/evilmartians/rails-aftercommit-everywhere--4j9g)
 
 
