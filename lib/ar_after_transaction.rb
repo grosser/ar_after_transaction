@@ -43,12 +43,10 @@ module ARAfterTransactionConnection
   def transaction_with_after(**args)
     clean = true
     transaction_without_after(**args) do
-      begin
-        yield
-      rescue ActiveRecord::Rollback
-        clean = false
-        raise
-      end
+      yield
+    rescue ActiveRecord::Rollback
+      clean = false
+      raise
     end
   rescue StandardError
     clean = false
