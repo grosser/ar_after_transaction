@@ -54,11 +54,12 @@ after_transaction will perform the given block immediately
 after_transaction assumes zero open transactions.<br/>
 If you use transactional fixtures you should change it in test mode.
 
+`Rspec:`
 ```ruby
-# config/environments/test.rb
-config.after_initialize do
-  ActiveRecord::Base.normally_open_transactions = 1
-end
+# spec/rails_helper.rb
+  config.before(:suite) do
+    ActiveRecord::Base.normally_open_transactions = 1
+  end
 ```
 
 ### Rails 3: after_commit hook can replace the first usage example:
