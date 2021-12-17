@@ -17,8 +17,8 @@ if ActiveRecord::VERSION::MAJOR > 2
       end
     end
 
-    def transaction_with_passthrough(*args, &block)
-      transaction_without_passthrough(*args, &block)
+    def transaction_with_passthrough(**args, &block)
+      transaction_without_passthrough(**args, &block)
     end
   end
 
