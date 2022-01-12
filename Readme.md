@@ -100,6 +100,7 @@ Authors
  - [C.W.](https://github.com/compwron)
  - [Ben Weintraub](https://github.com/benweint)
  - [Vladimir Temnikov](https://github.com/vladimirtemnikov)
+ - [Mark Gangl](https://github.com/attack)
 
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
