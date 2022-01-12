@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    ar_after_transaction (0.6.1)
+    ar_after_transaction (0.7.0)
       activerecord (>= 4.2.0, < 6.2)
 
 GEM
@@ -84,7 +84,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.2)
@@ -165,4 +167,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   2.2.3
+   2.3.4
