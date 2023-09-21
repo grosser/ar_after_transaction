@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ARAfterTransaction
-  VERSION = Version = '0.4.1'
+  VERSION = '0.8.0'
 end

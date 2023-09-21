@@ -5,8 +5,6 @@ rvm:
   - 2.2.2
   - 2.3.0
 gemfile:
- - gemfiles/rails3.gemfile
- - gemfiles/rails4.gemfile
  - gemfiles/rails5.gemfile
  - gemfiles/rails51.gemfile
 script: bundle exec rake spec
