@@ -48,7 +48,7 @@ module ARAfterTransactionConnection
       clean = false
       raise
     end
-  rescue StandardError
+  rescue Exception
     clean = false
     raise
   ensure

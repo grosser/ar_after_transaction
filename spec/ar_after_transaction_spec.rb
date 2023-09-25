@@ -34,6 +34,10 @@ class User
   def raise_rollback
     raise ActiveRecord::Rollback
   end
+
+  def sigterm
+    raise SignalException.new('TERM')
+  end
 end
 
 describe ARAfterTransaction do
@@ -54,9 +58,15 @@ describe ARAfterTransaction do
     expect(User.test_stack).to eq [:normal, :after]
   end
 
-  it 'does not execute when transaction was rolled back' do
+  it 'does not execute when transaction was rolled back by a StandardError' do
     User.test_callbacks = [:do_after, :do_normal, :oops]
     expect(-> { User.create! }).to raise_error(AnExpectedError)
+    expect(User.test_stack).to eq [:normal]
+  end
+
+  it 'does not execute when transaction was rolled back by an Exception' do
+    User.test_callbacks = [:do_after, :do_normal, :sigterm]
+    expect(-> { User.create! }).to raise_error(SignalException)
     expect(User.test_stack).to eq [:normal]
   end
 
