@@ -39,7 +39,9 @@ if ActiveRecord::VERSION::MAJOR > 2
     end
   end
 
-  Rack::Session::Cookie.send(:define_method, :warn) { |_| } # silence secret warning
+  if defined?(Rack::Session::Cookie)
+    Rack::Session::Cookie.send(:define_method, :warn) { |_| } # silence secret warning
+  end
   ARAfterTransaction::Application.initialize! # initialize app
 
   class AnExpectedError < RuntimeError; end
