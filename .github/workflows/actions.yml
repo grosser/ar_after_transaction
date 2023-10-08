@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         ruby: ['2.7', '3.0']
-        rails: ['5.2', '6.0', '6.1', '7.0']
+        rails: ['5.2', '6.0', '6.1', '7.0', '7.1']
         exclude:
         - ruby: '3.0'
           rails: '5.2'

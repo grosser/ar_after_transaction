@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ar_after_transaction (0.8.0)
-      activerecord (>= 5.2.0, < 7.1)
+      activerecord (>= 5.2.0, < 7.2)
 
 GEM
   remote: https://rubygems.org/
@@ -182,4 +182,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   2.3.4
+   2.3.12
