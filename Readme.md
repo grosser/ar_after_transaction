@@ -101,6 +101,7 @@ Authors
  - [Ben Weintraub](https://github.com/benweint)
  - [Vladimir Temnikov](https://github.com/vladimirtemnikov)
  - [Mark Gangl](https://github.com/attack)
+ - [Alex Vondrak](https://github.com/ajvondrak)
 
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
