@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ..
   specs:
     ar_after_transaction (0.10.0)
       activerecord (>= 5.2.0, < 7.3)
@@ -85,7 +85,7 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
-    diff-lcs (1.4.4)
+    diff-lcs (1.5.1)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -107,7 +107,6 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.7)
     minitest (5.25.0)
     net-imap (0.4.14)
       date
@@ -118,8 +117,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.7)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
     psych (5.1.2)
       stringio
@@ -166,22 +164,21 @@ GEM
       psych (>= 4.0.0)
     reline (0.5.9)
       io-console (~> 0.5)
-    rspec (3.10.0)
-      rspec-core (~> 3.10.0)
-      rspec-expectations (~> 3.10.0)
-      rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.0)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.0)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-support (3.10.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
     securerandom (0.3.1)
-    sqlite3 (2.0.4)
-      mini_portile2 (~> 2.8.0)
+    sqlite3 (2.0.4-x86_64-darwin)
     stringio (3.1.1)
     thor (1.3.1)
     timeout (0.4.1)
@@ -196,9 +193,10 @@ GEM
     zeitwerk (2.6.17)
 
 PLATFORMS
-  ruby
+  x86_64-darwin
 
 DEPENDENCIES
+  activerecord (~> 7.2.0)
   ar_after_transaction!
   bump
   rails
@@ -208,4 +206,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   2.3.12
+   2.5.14
