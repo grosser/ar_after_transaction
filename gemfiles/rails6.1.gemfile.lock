@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    ar_after_transaction (0.11.0)
+    ar_after_transaction (0.12.0)
       activerecord (>= 6.1.0, < 7.3)
 
 GEM
