@@ -1,8 +1,8 @@
 PATH
   remote: ..
   specs:
-    ar_after_transaction (0.9.0)
-      activerecord (>= 5.2.0, < 7.2)
+    ar_after_transaction (0.10.0)
+      activerecord (>= 6.1.0, < 7.2)
 
 GEM
   remote: https://rubygems.org/
