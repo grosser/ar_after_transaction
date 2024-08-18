@@ -185,8 +185,8 @@ GEM
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
     ruby2_keywords (0.0.5)
-    sqlite3 (1.6.6-arm64-darwin)
-    sqlite3 (1.6.6-x86_64-linux)
+    sqlite3 (1.7.3-arm64-darwin)
+    sqlite3 (1.7.3-x86_64-linux)
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
@@ -211,7 +211,7 @@ DEPENDENCIES
   rails
   rake
   rspec (~> 3)
-  sqlite3
+  sqlite3 (~> 1.0)
   wwtd
 
 BUNDLED WITH

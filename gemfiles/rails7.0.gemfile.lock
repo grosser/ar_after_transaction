@@ -157,7 +157,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.0)
-    sqlite3 (1.4.2)
+    sqlite3 (1.4.4)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -179,7 +179,7 @@ DEPENDENCIES
   rails
   rake
   rspec (~> 3)
-  sqlite3
+  sqlite3 (~> 1.0)
   wwtd
 
 BUNDLED WITH

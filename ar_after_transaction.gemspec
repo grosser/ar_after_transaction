@@ -14,7 +14,7 @@ Gem::Specification.new 'ar_after_transaction', ARAfterTransaction::VERSION do |s
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 3'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.0' # avoid 2.0 for now
   s.add_development_dependency 'wwtd'
   s.license = 'MIT'
 end
