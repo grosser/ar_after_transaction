@@ -1,8 +1,8 @@
 PATH
   remote: ..
   specs:
-    ar_after_transaction (0.9.0)
-      activerecord (>= 5.2.0, < 7.2)
+    ar_after_transaction (0.10.0)
+      activerecord (>= 6.1.0, < 7.2)
 
 GEM
   remote: https://rubygems.org/
@@ -84,13 +84,13 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.7.1)
+    mini_portile2 (2.8.7)
     minitest (5.15.0)
     nio4r (2.5.8)
-    nokogiri (1.13.0)
-      mini_portile2 (~> 2.7.0)
+    nokogiri (1.16.7)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    racc (1.6.0)
+    racc (1.8.1)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -141,7 +141,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
+    sqlite3 (1.4.4)
     thor (1.2.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -161,7 +161,7 @@ DEPENDENCIES
   rails
   rake
   rspec (~> 3)
-  sqlite3
+  sqlite3 (~> 1.0)
   wwtd
 
 BUNDLED WITH

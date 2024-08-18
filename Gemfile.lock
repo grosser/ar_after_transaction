@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ar_after_transaction (0.10.0)
-      activerecord (>= 5.2.0, < 7.2)
+      activerecord (>= 6.1.0, < 7.2)
 
 GEM
   remote: https://rubygems.org/
@@ -157,7 +157,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.0)
-    sqlite3 (1.4.2)
+    sqlite3 (1.6.8-arm64-darwin)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -178,7 +178,7 @@ DEPENDENCIES
   rails
   rake
   rspec (~> 3)
-  sqlite3
+  sqlite3 (~> 1.0)
   wwtd
 
 BUNDLED WITH

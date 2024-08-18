@@ -1,8 +1,8 @@
 PATH
   remote: ..
   specs:
-    ar_after_transaction (0.9.0)
-      activerecord (>= 5.2.0, < 7.2)
+    ar_after_transaction (0.10.0)
+      activerecord (>= 6.1.0, < 7.2)
 
 GEM
   remote: https://rubygems.org/
@@ -122,13 +122,13 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     psych (5.1.0)
       stringio
-    racc (1.7.1)
+    racc (1.8.1)
     rack (3.0.8)
     rack-session (2.0.0)
       rack (>= 3.0.0)
@@ -185,8 +185,8 @@ GEM
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
     ruby2_keywords (0.0.5)
-    sqlite3 (1.6.6-arm64-darwin)
-    sqlite3 (1.6.6-x86_64-linux)
+    sqlite3 (1.7.3-arm64-darwin)
+    sqlite3 (1.7.3-x86_64-linux)
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
@@ -201,6 +201,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -210,7 +211,7 @@ DEPENDENCIES
   rails
   rake
   rspec (~> 3)
-  sqlite3
+  sqlite3 (~> 1.0)
   wwtd
 
 BUNDLED WITH
