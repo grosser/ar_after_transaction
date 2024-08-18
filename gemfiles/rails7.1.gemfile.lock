@@ -122,13 +122,13 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     psych (5.1.0)
       stringio
-    racc (1.7.1)
+    racc (1.8.1)
     rack (3.0.8)
     rack-session (2.0.0)
       rack (>= 3.0.0)
