@@ -62,15 +62,14 @@ If you use transactional fixtures you should change it in test mode.
   end
 ```
 
-### Rails 3: after_commit hook can replace the first usage example:
+### Adding new rails versions
 
-```ruby
-class User
-  after_commit :send_an_email on: :create
-  after_create :do_stuff, :oops
-  ...
-end
-```
+- bump in `ar_after_transaction.gemspec`
+- create a new gemfiles/<new>.gemfile
+- `BUNDLE_GEMFILE=gemfiles/<new>.gemfile bundle`
+- `BUNDLE_GEMFILE=gemfiles/<new>.gemfile bundle exec rake`
+- update `.github/workflows/actions.yml`
+- make a PR
 
 Alternative
 ===========
@@ -106,4 +105,3 @@ Authors
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
 License: MIT<br/>
-
