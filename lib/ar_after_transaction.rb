@@ -83,6 +83,8 @@ module ARAfterTransactionConnection
   end
 end
 
-ActiveRecord::Base.extend ARAfterTransaction::ClassMethods
-ActiveRecord::Base.include ARAfterTransaction::InstanceMethods
+ActiveSupport.on_load(:active_record) do
+  ActiveRecord::Base.extend ARAfterTransaction::ClassMethods
+  ActiveRecord::Base.include ARAfterTransaction::InstanceMethods
+end
 ActiveRecord::ConnectionAdapters::AbstractAdapter.include ARAfterTransactionConnection
